@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dust.Restful", "Dust.Restful\Dust.Restful.csproj", "{18C9B69D-9C05-45BB-824B-FB3CE7242AB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18C9B69D-9C05-45BB-824B-FB3CE7242AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18C9B69D-9C05-45BB-824B-FB3CE7242AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18C9B69D-9C05-45BB-824B-FB3CE7242AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18C9B69D-9C05-45BB-824B-FB3CE7242AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46FDA425-4EEC-4E95-A8ED-0D48D65A00B2}
+	EndGlobalSection
+EndGlobal
