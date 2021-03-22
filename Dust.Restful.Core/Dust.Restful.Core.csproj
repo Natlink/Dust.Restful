@@ -12,4 +12,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Dust.ORM.Core">
+      <HintPath>..\..\Dust.ORM\Dust.ORM.Core\bin\Debug\net5.0\Dust.ORM.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dust.ORM.Mysql">
+      <HintPath>..\..\Dust.ORM\Dust.ORM.Mysql\bin\Debug\net5.0\Dust.ORM.Mysql.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
