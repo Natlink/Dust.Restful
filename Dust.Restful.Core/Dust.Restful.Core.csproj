@@ -19,6 +19,9 @@
     <Reference Include="Dust.ORM.Mysql">
       <HintPath>..\..\Dust.ORM\Dust.ORM.Mysql\bin\Debug\net5.0\Dust.ORM.Mysql.dll</HintPath>
     </Reference>
+    <Reference Include="Dust.Utils.Core">
+      <HintPath>..\..\Dust.Utils\Dust.Utils.Core\bin\Debug\net5.0\Dust.Utils.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
