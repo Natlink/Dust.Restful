@@ -29,19 +29,7 @@ namespace Dust.Restful.Test.Test
             Log = new TestLogger(output);
         }
 
-        [Fact]
-        public void RestSetupTest()
-        {
-            ModelTestController<SimpleModel> Controller = GenerateController<SimpleModel>(); 
 
-
-            Assert.True(ResolveRequest(Controller.Add(new SimpleModel(5, 42, "Value"))));
-
-            SimpleModel value = ResolveRequest(Controller.Get(5));
-            Assert.Equal(5, value.ID);
-            Assert.Equal(42, value.TestValue1);
-            Assert.Equal("Value", value.TestValue2);
-        }
 
 
         public ModelTestController<T> GenerateController<T>() where T : DataModel, new()
@@ -62,5 +50,39 @@ namespace Dust.Restful.Test.Test
             return default(T);
         }
 
+        [Fact]
+        public void RestSetupTest()
+        {
+            ModelTestController<SimpleModel> Controller = GenerateController<SimpleModel>(); 
+            Assert.True(ResolveRequest(Controller.Add(new SimpleModel(5, 42, "Value"))));
+            SimpleModel value = ResolveRequest(Controller.Get(5));
+            Assert.Equal(5, value.ID);
+            Assert.Equal(42, value.TestValue1);
+            Assert.Equal("Value", value.TestValue2);
+        }
+
+        [Fact]
+        public void ReferenceResolvingTest()
+        {
+            ModelTestController<ReferenceModel> RefController = GenerateController<ReferenceModel>();
+            ModelTestController<SubReferenceA> AController = GenerateController<SubReferenceA>();
+            ModelTestController<SubReferenceB> BController = GenerateController<SubReferenceB>();
+            for(int i = 1; i < 11; ++i)
+            {
+                Assert.True(ResolveRequest(AController.Add(new SubReferenceA(i, 42 * i))));
+                Assert.True(ResolveRequest(BController.Add(new SubReferenceB(i, 42 * i))));
+                Assert.True(ResolveRequest(RefController.Add(new ReferenceModel(i, 42*i, i, null, i, null))));
+            }
+
+            for(int i = 1; i < 11; ++i)
+            {
+                ReferenceModel m = ResolveRequest(RefController.Get(i));
+                Assert.NotNull(m);
+                Assert.NotNull(m.ReferenceA_ref);
+                Assert.NotNull(m.ReferenceB_ref);
+                Assert.Equal(m.ReferenceA, m.ReferenceA_ref.ID);
+                Assert.Equal(m.ReferenceB, m.ReferenceB_ref.ID);
+            }
+        }
     }
 }
