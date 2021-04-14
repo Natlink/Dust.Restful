@@ -14,7 +14,7 @@ namespace Dust.Restful.Test.Controllers
 {
     public class ModelTestController<T> : DataController<T> where T: DataModel, new()
     {
-        public ModelTestController(int authLevel, IDataService<T> dataService, ILoginService loginService) : base(authLevel, dataService, loginService)
+        public ModelTestController(IDataService<T> dataService) : base(dataService)
         {
         }
 

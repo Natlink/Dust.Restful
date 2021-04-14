@@ -11,7 +11,7 @@ namespace Dust.Restful.Core.Services.Implementations
     public abstract class DataService<T> : IDataService<T> where T : DataModel, new()
     {
 
-        IRepository<T> DataRepo;
+        protected IRepository<T> DataRepo;
 
         public DataService(IRepository<T> dataRepo)
         {

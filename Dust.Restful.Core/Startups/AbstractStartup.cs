@@ -9,11 +9,17 @@ namespace Dust.Restful.Core.Startups
 {
     public abstract class AbstractStartup
     {
+        public IConfiguration Configuration { get; protected set; }
 
         public AbstractStartup(IConfiguration configuration)
         {
-
+            Configuration = configuration;
         }
 
+
+        public void DefaultConfigure()
+        { 
+        
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace Dust.Restful.Test.Test
 
             ModelTestRepository<T> Repo = new ModelTestRepository<T>(ORM);
             ModelTestServices<T> Service = new ModelTestServices<T>(Repo);
-            ModelTestController<T> Controller = new ModelTestController<T>(-1, Service, new LoginService());
+            ModelTestController<T> Controller = new ModelTestController<T>(Service);
 
             return Controller;
         }

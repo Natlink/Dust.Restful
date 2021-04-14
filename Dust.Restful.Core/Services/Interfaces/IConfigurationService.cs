@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Dust.Utils.Core.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dust.Restful.Core.Services.Interfaces
 {
-    public interface IConfigurationService
+    public interface IConfigurationService<T> where T : Configuration, new()
     {
 
-        public Configuration Get();
+        public T Get();
 
     }
 
-    public class Configuration
+    public class Configuration : DustConfig
     {
     }
 
