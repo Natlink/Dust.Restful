@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -25,7 +26,7 @@ namespace Dust.Restful.Core.Services.Implementations
             }
             if (Values == null)
             {
-                Values = ConfigLoader.Load<T>(filename, logs);
+                Values = ConfigLoader.Load<T>(filename, new List<Assembly>(), logs);
                 logs.Info("[V] Configuration service started. Config file loaded.");
             }
         }

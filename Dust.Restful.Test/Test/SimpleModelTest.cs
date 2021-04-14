@@ -34,7 +34,7 @@ namespace Dust.Restful.Test.Test
 
         public ModelTestController<T> GenerateController<T>() where T : DataModel, new()
         {
-            if (ORM == null) ORM = new ORMManager(Log);
+            if (ORM == null) ORM = new ORMManager(Log, "OrmExtension");
 
             ModelTestRepository<T> Repo = new ModelTestRepository<T>(ORM);
             ModelTestServices<T> Service = new ModelTestServices<T>(Repo);
