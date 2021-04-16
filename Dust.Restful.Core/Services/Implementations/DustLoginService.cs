@@ -1,6 +1,7 @@
 ﻿using Dust.Restful.Core.Models;
 using Dust.Restful.Core.Repositories.Interfaces;
 using Dust.Restful.Core.Services.Interfaces;
+using Dust.Utils.Core.Logs;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,18 +15,20 @@ namespace Dust.Restful.Core.Services.Implementations
     public class DustLoginService<T> : ILoginService<T> where T : DustUserModel, new()
     {
         private DustUserRepository<T> UserRepo;
+        private ILogger Logs;
 
         private Configuration Config;
         private string DailySalt;
         private ConcurrentDictionary<string, T> ConnectedUsers;
 
-        public DustLoginService(DustUserRepository<T> userRepo, IConfigurationService<Configuration> config)
+        public DustLoginService(DustUserRepository<T> userRepo, IConfigurationService<Configuration> config, ILogger logs)
         {
             UserRepo = userRepo;
             Config = config.Get();
             ConnectedUsers = new ConcurrentDictionary<string, T>();
-            DailySalt = DateTime.UtcNow + " - "; //+Config.LoginSalt;
-            Console.WriteLine("[V] Login service starting.");
+            DailySalt = DateTime.UtcNow + " - "+Config.LoginSalt;
+            Logs = logs;
+            Logs.Info("[V] Login service starting.");
         }
 
         public T UserIsConnected(string token)
@@ -51,22 +54,23 @@ namespace Dust.Restful.Core.Services.Implementations
                         if (!LogoutUser(uu.Token))
                         {
                             errorCode = 3;
-                            Console.WriteLine("[X] User already connected, can't remove him: " + u.Login);
+                            Logs.Info("[X] User already connected, can't remove him: " + u.Login);
+                            return null;
                         }
                         break;
                     }
                 }
                 if (ConnectedUsers.TryAdd(u.Token, u))
                 {
-                    Console.WriteLine("[+] Loged in user: " + u.Login );
+                    Logs.Info("[+] Loged in user: " + u.Login );
                     return u;
                 }
                 errorCode = 2;
-                Console.WriteLine("[X] Error happened, can't add user: " + u.Login);
+                Logs.Info("[X] Error happened, can't add user: " + u.Login);
                 return null;
             }
             errorCode = 1;
-            Console.WriteLine("[X] Bad credentials: "+username+", "+password);
+            Logs.Info("[X] Bad credentials: "+username+", "+password);
             return null;
         }
 
@@ -76,7 +80,7 @@ namespace Dust.Restful.Core.Services.Implementations
             if(ConnectedUsers.ContainsKey(token) && 
                     ConnectedUsers.TryRemove(token, out u))
             {
-                Console.WriteLine("[-] Loged out user: " + u.Login);
+                Logs.Info("[-] Loged out user: " + u.Login);
                 return true;
             }
             return false;
@@ -84,10 +88,14 @@ namespace Dust.Restful.Core.Services.Implementations
 
         private string GenerateToken(string username)
         {
-            string rawData = username+" - "+DateTime.UtcNow+" - "+DailySalt;
+            return Hash(username+" - "+DateTime.UtcNow+" - "+DailySalt);
+        }
+
+        private string Hash(string data)
+        {
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(data));
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {

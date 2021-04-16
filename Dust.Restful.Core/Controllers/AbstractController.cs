@@ -42,6 +42,8 @@ namespace Dust.Restful.Core.Controllers
             return LogedUser != null && (int)LogedUser.AccountLevel >= minRequieredAccountLevel;
         }
 
+
+
     }
 
     public abstract class AbstractController : ControllerBase

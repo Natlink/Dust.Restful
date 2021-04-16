@@ -17,37 +17,13 @@ using Xunit.Abstractions;
 
 namespace Dust.Restful.Test.Test
 {
-    public class SimpleModelTest
+
+    [Collection("Test")]
+    public class SimpleModelTest : AbstractTest
     {
 
-        private readonly TestLogger Log;
-        private ORMManager ORM;
-
-
-        public SimpleModelTest(ITestOutputHelper output)
+        public SimpleModelTest(ITestOutputHelper output) : base(output)
         {
-            Log = new TestLogger(output);
-        }
-
-
-
-
-        public ModelTestController<T> GenerateController<T>() where T : DataModel, new()
-        {
-            if (ORM == null) ORM = new ORMManager(Log, "OrmExtension");
-
-            ModelTestRepository<T> Repo = new ModelTestRepository<T>(ORM);
-            ModelTestServices<T> Service = new ModelTestServices<T>(Repo);
-            ModelTestController<T> Controller = new ModelTestController<T>(Service);
-
-            return Controller;
-        }
-
-        public T ResolveRequest<T>(ActionResult<T> result)
-        {
-            ActionResult test = result.Result;
-            if (test is OkObjectResult) return (T) ((OkObjectResult)test).Value;
-            return default(T);
         }
 
         [Fact]

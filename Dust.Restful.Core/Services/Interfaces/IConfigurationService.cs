@@ -15,6 +15,10 @@ namespace Dust.Restful.Core.Services.Interfaces
 
     public class Configuration : DustConfig
     {
+
+        public string LoginSalt;
+        public string PasswordSalt;
+
     }
 
 }
