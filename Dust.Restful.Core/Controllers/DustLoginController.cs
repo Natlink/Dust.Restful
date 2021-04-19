@@ -11,13 +11,11 @@ using System.Threading.Tasks;
 namespace Dust.Restful.Core.Controllers
 {
 
-    [ApiController]
-    [Route("[controller]")]
-    public class LoginController : AbstractController<DustUserModel>
+    public class DustLoginController : AbstractController<DustUserModel>
     {
         ILoginService<DustUserModel> LoginService;
 
-        public LoginController(ILoginService<DustUserModel> loginService) : base(loginService, -1)
+        public DustLoginController(ILoginService<DustUserModel> loginService) : base(loginService, -1)
         {
             LoginService = loginService;
         }

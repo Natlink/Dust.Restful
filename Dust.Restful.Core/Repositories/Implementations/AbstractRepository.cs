@@ -12,10 +12,10 @@ namespace Dust.Restful.Core.Repositories.Implementations
 {
     public abstract class AbstractRepository<T> : IRepository<T> where T : DataModel, new()
     {
-        protected ORMManager ORM;
+        protected IORMManager ORM;
         protected DataRepository<T> Repo;
 
-        public AbstractRepository(ORMManager orm){
+        public AbstractRepository(IORMManager orm){
             ORM = orm;
             Repo = ORM.Get<T>();
         }

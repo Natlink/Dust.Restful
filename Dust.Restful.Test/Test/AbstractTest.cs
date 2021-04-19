@@ -2,6 +2,7 @@
 using Dust.ORM.Core.Models;
 using Dust.Restful.Core.Controllers;
 using Dust.Restful.Core.Models;
+using Dust.Restful.Core.Repositories.Implementations;
 using Dust.Restful.Core.Repositories.Interfaces;
 using Dust.Restful.Core.Services.Implementations;
 using Dust.Restful.Core.Services.Interfaces;
@@ -43,18 +44,18 @@ namespace Dust.Restful.Test.Test
             return Controller;
         }
 
-        public (LogedModelController<T>, LoginController) GenerateLogedController<T>() where T : DataModel, new()
+        public (LogedModelController<T>, DustLoginController) GenerateLogedController<T>() where T : DataModel, new()
         {
             if (ORM == null) ORM = new ORMManager(Log, "OrmExtension");
 
             ModelTestRepository<T> Repo = new ModelTestRepository<T>(ORM);
-            DustUserRepository<DustUserModel> UserRepo = new DustUserRepository<DustUserModel>(ORM);
+            UserRepository<DustUserModel> UserRepo = new UserRepository<DustUserModel>(ORM);
 
             ModelTestServices<T> Service = new ModelTestServices<T>(Repo);
             DustConfigurationService<Configuration> ConfigService = new DustConfigurationService<Configuration>(Log);
             DustLoginService<DustUserModel> LoginService = new DustLoginService<DustUserModel>(UserRepo, ConfigService, Log);
             LogedModelController<T> Controller = new LogedModelController<T>(Service, LoginService);
-            LoginController LoginController = new LoginController(LoginService);            
+            DustLoginController LoginController = new DustLoginController(LoginService);            
 
             return (Controller, LoginController);
         }

@@ -1,4 +1,5 @@
 ﻿using Dust.Restful.Core.Models;
+using Dust.Restful.Core.Repositories.Implementations;
 using Dust.Restful.Core.Repositories.Interfaces;
 using Dust.Restful.Core.Services.Interfaces;
 using Dust.Utils.Core.Logs;
@@ -14,14 +15,14 @@ namespace Dust.Restful.Core.Services.Implementations
 {
     public class DustLoginService<T> : ILoginService<T> where T : DustUserModel, new()
     {
-        private DustUserRepository<T> UserRepo;
+        private IUserRepository<T> UserRepo;
         private ILogger Logs;
 
         private Configuration Config;
         private string DailySalt;
         private ConcurrentDictionary<string, T> ConnectedUsers;
 
-        public DustLoginService(DustUserRepository<T> userRepo, IConfigurationService<Configuration> config, ILogger logs)
+        public DustLoginService(IUserRepository<T> userRepo, IConfigurationService<Configuration> config, ILogger logs)
         {
             UserRepo = userRepo;
             Config = config.Get();
