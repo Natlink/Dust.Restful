@@ -21,13 +21,13 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<LoginAnswer> WantLogin(LoginInformation infos)
+        public ActionResult<LoginAnswer<DustUserModel>> WantLogin(LoginInformation infos)
         {
-            if (IsLoged()) return new LoginAnswer(3);
+            if (IsLoged()) return new LoginAnswer<DustUserModel>(3);
             DustUserModel u = LoginService.LoginUser(infos.Username, infos.Password, out int errorCode);
             return errorCode != 0 ?
-                Ok(new LoginAnswer(errorCode)) :
-                Ok(new LoginAnswer(u.Token, u.Login, u.ID, (int)u.AccountLevel));
+                Ok(new LoginAnswer<DustUserModel>(errorCode)) :
+                Ok(new LoginAnswer<DustUserModel>(u));
 
         }
 

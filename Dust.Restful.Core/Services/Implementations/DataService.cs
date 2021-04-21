@@ -23,6 +23,11 @@ namespace Dust.Restful.Core.Services.Implementations
             return DataRepo.Insert(dm);
         }
 
+        public virtual bool Add(T dm, out int id)
+        {
+            return DataRepo.Insert(dm, out id);
+        }
+
         public virtual bool Add(T dm, out T res)
         {
             DataRepo.Insert(dm);

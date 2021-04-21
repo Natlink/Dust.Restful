@@ -54,5 +54,10 @@ namespace Dust.Restful.Core.Repositories.Implementations
         {
             return Repo.Insert(data);
         }
+
+        public bool Insert(T data, out int id)
+        {
+            return Repo.Insert(data, out id);
+        }
     }
 }

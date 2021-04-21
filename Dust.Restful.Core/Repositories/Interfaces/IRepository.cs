@@ -13,6 +13,7 @@ namespace Dust.Restful.Core.Repositories.Interfaces
         public bool Exist(int id);
         public void Delete(int id);
         public bool Insert(T data);
+        public bool Insert(T data, out int id);
         public T GetLast();
         public bool Edit(T data);
     }

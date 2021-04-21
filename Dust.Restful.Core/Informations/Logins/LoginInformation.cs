@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dust.Restful.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,35 +24,28 @@ namespace Dust.Restful.Core.Informations.Logins
         }
     }
 
-    public class LoginAnswer
+    public class LoginAnswer<T> where T : UserModel
     {
-        public string Token { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public int AccountLevel { get; set; }
+        public T User { get; set; }
 
         public int ErrorCode { get; set; }
 
-        public LoginAnswer(string token, string name, int iD, int accountLevel)
+        public LoginAnswer(T user, int errorCode = 0)
         {
-            Token = token;
-            Name = name;
-            ID = iD;
-            AccountLevel = accountLevel;
-            ErrorCode = 0;
+            User = user;
+            ErrorCode = errorCode;
         }
 
         public LoginAnswer(int errorCode)
         {
             ErrorCode = errorCode;
-            Token = "";
-            Name = "";
-            ID = -1;
-            AccountLevel = 0;
+            User = null;
         }
 
         public LoginAnswer()
         {
+            ErrorCode = 3;
+            User = null;
         }
     }
 }
