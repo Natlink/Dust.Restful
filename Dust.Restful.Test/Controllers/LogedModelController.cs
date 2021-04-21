@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Dust.Restful.Test.Controllers
 {
-    public class LogedModelController<T> : DataController<T, DustUserModel> where T : DataModel, new()
+    public class LogedModelController<T> : DataController<T> where T : DataModel, new()
     {
 
-        public LogedModelController(DataService<T> data, DustLoginService<DustUserModel> login) : base(-1, data, login)
+        public LogedModelController(DataService<T> data, DustLoginService<DustUserModel> login) : base(data)
         {
         }
 

@@ -14,12 +14,11 @@ namespace Dust.Restful.Core.Controllers
         where T : DataModel, new() 
         where UserType : UserModel
     {
+        public IDataService<T, UserType> DataAndUserService { get; set; }
 
-        public IDataService<T> DataService { get; set; }
-
-        public DataController(int authLevel, IDataService<T> dataService, ILoginService<UserType> loginService) : base(loginService, authLevel)
+        public DataController(int authLevel, IDataService<T, UserType> dataService, ILoginService<UserType> loginService) : base(loginService, authLevel)
         {
-            DataService = dataService;
+            DataAndUserService = dataService;
         }
 
         [HttpGet("get/{id}")]
@@ -27,7 +26,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                return Ok(DataService.Get(id));
+                return Ok(DataAndUserService.Get(LogedUser, id));
             }
             return Unauthorized();
         }
@@ -37,7 +36,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                T tmp = DataService.Copy(id);
+                T tmp = DataAndUserService.Copy(LogedUser, id);
                 ActionResult<T> res;
                 if(tmp == null)
                 {
@@ -57,7 +56,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                return Ok(DataService.GetAll(row));
+                return Ok(DataAndUserService.GetAll(LogedUser, row));
             }
             return Unauthorized();
         }
@@ -67,7 +66,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                return Ok(DataService.Edit(id, data));
+                return Ok(DataAndUserService.Edit(LogedUser, id, data));
             }
             return Unauthorized();
         }
@@ -77,7 +76,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                return Ok(DataService.Add(data));
+                return Ok(DataAndUserService.Add(LogedUser, data));
             }
             return Unauthorized();
         }
@@ -87,7 +86,7 @@ namespace Dust.Restful.Core.Controllers
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
-                return Ok(DataService.Delete(id));
+                return Ok(DataAndUserService.Delete(LogedUser, id));
             }
             return Unauthorized();
         }

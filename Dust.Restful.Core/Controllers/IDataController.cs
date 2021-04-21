@@ -12,8 +12,6 @@ namespace Dust.Restful.Core.Controllers
     public interface IDataController<T> where T : DataModel, new()
     {
 
-        public IDataService<T> DataService { get; }
-
         public ActionResult<T> Get(int id);
         public ActionResult<T> Copy(int id);
         public ActionResult<IEnumerable<T>> GetAll(int row);
