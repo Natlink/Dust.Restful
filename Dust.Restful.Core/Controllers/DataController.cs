@@ -22,7 +22,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpGet("get/{id}")]
-        public virtual ActionResult<T> Get(int id)
+        public virtual ActionResult<T> Get(long id)
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
@@ -32,7 +32,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpGet("copy/{id}")]
-        public virtual ActionResult<T> Copy(int id)
+        public virtual ActionResult<T> Copy(long id)
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
@@ -62,7 +62,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpPost("edit/{id}")]
-        public virtual ActionResult<bool> Edit(int id, T data)
+        public virtual ActionResult<bool> Edit(long id, T data)
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
@@ -82,7 +82,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public virtual ActionResult<bool> Delete(int id)
+        public virtual ActionResult<bool> Delete(long id)
         {
             if (IsLogedAndAuthorized(RequieredAuthLevel))
             {
@@ -104,7 +104,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpGet("get/{id}")]
-        public virtual ActionResult<T> Get(int id)
+        public virtual ActionResult<T> Get(long id)
         {
             if (IsLogedAndAuthorized())
             {
@@ -114,7 +114,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpGet("copy/{id}")]
-        public virtual ActionResult<T> Copy(int id)
+        public virtual ActionResult<T> Copy(long id)
         {
             if (IsLogedAndAuthorized())
             {
@@ -144,7 +144,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpPost("edit/{id}")]
-        public virtual ActionResult<bool> Edit(int id, T data)
+        public virtual ActionResult<bool> Edit(long id, T data)
         {
             if (IsLogedAndAuthorized())
             {
@@ -164,7 +164,7 @@ namespace Dust.Restful.Core.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public virtual ActionResult<bool> Delete(int id)
+        public virtual ActionResult<bool> Delete(long id)
         {
             if (IsLogedAndAuthorized())
             {

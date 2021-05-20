@@ -20,7 +20,7 @@ namespace Dust.Restful.Core.Repositories.Implementations
             Repo = ORM.Get<T>();
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             Repo.Delete(id);
         }
@@ -30,12 +30,12 @@ namespace Dust.Restful.Core.Repositories.Implementations
             return Repo.Edit(data);
         }
 
-        public bool Exist(int id)
+        public bool Exist(long id)
         {
             return Repo.Exist(id);
         }
 
-        public T Get(int id)
+        public T Get(long id)
         {
             return Repo.Get(id);
         }
@@ -55,7 +55,7 @@ namespace Dust.Restful.Core.Repositories.Implementations
             return Repo.Insert(data);
         }
 
-        public bool Insert(T data, out int id)
+        public bool Insert(T data, out long id)
         {
             return Repo.Insert(data, out id);
         }

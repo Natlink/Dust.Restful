@@ -12,23 +12,23 @@ namespace Dust.Restful.Core.Services.Interfaces
 
     public interface IDataService<T> : IDataService where T : DataModel
     {
-        T Get(int id);
-        T Copy(int id);
+        T Get(long id);
+        T Copy(long id);
         IEnumerable<T> GetAll(int row);
-        bool Edit(int id, T dm);
+        bool Edit(long id, T dm);
         bool Add(T dm);
         bool Add(T dm, out T res);
-        bool Delete(int id);
+        bool Delete(long id);
     }
 
     public interface IDataService<T, UserType> : IDataService where T : DataModel where UserType : UserModel
     {
-        T Get(UserType user, int id);
-        T Copy(UserType user, int id);
+        T Get(UserType user, long id);
+        T Copy(UserType user, long id);
         IEnumerable<T> GetAll(UserType user, int row);
-        bool Edit(UserType user, int id, T dm);
+        bool Edit(UserType user, long id, T dm);
         bool Add(UserType user, T dm);
         bool Add(UserType user, T dm, out T res);
-        bool Delete(UserType user, int id);
+        bool Delete(UserType user, long id);
     }
 }

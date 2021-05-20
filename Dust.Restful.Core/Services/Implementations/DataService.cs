@@ -24,7 +24,7 @@ namespace Dust.Restful.Core.Services.Implementations
             return DataRepo.Insert(dm);
         }
 
-        public virtual bool Add(T dm, out int id)
+        public virtual bool Add(T dm, out long id)
         {
             return DataRepo.Insert(dm, out id);
         }
@@ -36,18 +36,18 @@ namespace Dust.Restful.Core.Services.Implementations
             return res != null;
         }
 
-        public virtual bool Delete(int id)
+        public virtual bool Delete(long id)
         {
             DataRepo.Delete(id);
             return true;
         }
 
-        public virtual bool Edit(int id, T dm)
+        public virtual bool Edit(long id, T dm)
         {
             return DataRepo.Edit(dm);
         }
 
-        public virtual T Get(int id)
+        public virtual T Get(long id)
         {
             return DataRepo.Get(id);
         }
@@ -57,7 +57,7 @@ namespace Dust.Restful.Core.Services.Implementations
             return DataRepo.GetAll(raw);
         }
 
-        public virtual T Copy(int id)
+        public virtual T Copy(long id)
         {
             T tmp = Get(id);
             return Add(tmp, out T res) ? res : null;
@@ -80,7 +80,7 @@ namespace Dust.Restful.Core.Services.Implementations
             return DataRepo.Insert(dm);
         }
 
-        public virtual bool Add(UserType user, T dm, out int id)
+        public virtual bool Add(UserType user, T dm, out long id)
         {
             return DataRepo.Insert(dm, out id);
         }
@@ -92,18 +92,18 @@ namespace Dust.Restful.Core.Services.Implementations
             return res != null;
         }
 
-        public virtual bool Delete(UserType user, int id)
+        public virtual bool Delete(UserType user, long id)
         {
             DataRepo.Delete(id);
             return true;
         }
 
-        public virtual bool Edit(UserType user, int id, T dm)
+        public virtual bool Edit(UserType user, long id, T dm)
         {
             return DataRepo.Edit(dm);
         }
 
-        public virtual T Get(UserType user, int id)
+        public virtual T Get(UserType user, long id)
         {
             return DataRepo.Get(id);
         }
@@ -113,7 +113,7 @@ namespace Dust.Restful.Core.Services.Implementations
             return DataRepo.GetAll(raw);
         }
 
-        public virtual T Copy(UserType user, int id)
+        public virtual T Copy(UserType user, long id)
         {
             T tmp = Get(user, id);
             return Add(user, tmp, out T res) ? res : null;

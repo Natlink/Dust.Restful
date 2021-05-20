@@ -12,12 +12,12 @@ namespace Dust.Restful.Core.Controllers
     public interface IDataController<T> where T : DataModel, new()
     {
 
-        public ActionResult<T> Get(int id);
-        public ActionResult<T> Copy(int id);
+        public ActionResult<T> Get(long id);
+        public ActionResult<T> Copy(long id);
         public ActionResult<IEnumerable<T>> GetAll(int row);
-        public ActionResult<bool> Edit(int id, T data);
+        public ActionResult<bool> Edit(long id, T data);
         public ActionResult<bool> Add(T data);
-        public ActionResult<bool> Delete(int id);
+        public ActionResult<bool> Delete(long id);
 
     }
 }
