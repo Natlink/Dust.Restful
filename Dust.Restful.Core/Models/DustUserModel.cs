@@ -10,15 +10,18 @@ namespace Dust.Restful.Core.Models
     public class DustUserModel : UserModel
     {
         public string Token { get; set; }
+        public DustPermissionModel Permission { get; set; }
 
-        public DustUserModel(int id, string login, string password, int accountLevel) : base(id, login, password, accountLevel)
+        public DustUserModel(int id, string login, string password, int accountLevel, DustPermissionModel permission) : base(id, login, password, accountLevel)
         {
             Token = "";
+            Permission = permission;
         }
 
         public DustUserModel() : base()
         {
             Token = "";
+            Permission = new DustPermissionModel(false, false, false, false, false, false);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Dust.Restful.Test.Test
             var Login = res.Item2;
             var Data = res.Item1;
 
-            Assert.True(ORM.Get<DustUserModel>().Insert(new DustUserModel(0, "username", "password", 0)));
+            Assert.True(ORM.Get<DustUserModel>().Insert(new DustUserModel(0, "username", "password", 0,null)));
 
             var loginAnswer = ResolveRequest(Login.WantLogin(new Core.Informations.Logins.LoginInformation("username", "password")));
             Assert.NotNull(loginAnswer);
