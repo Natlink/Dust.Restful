@@ -18,7 +18,6 @@ namespace Dust.Restful.Core.Services.Interfaces
 
         public string LoginSalt;
         public string PasswordSalt;
-        public string PermissionFile;
 
     }
 
